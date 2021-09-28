@@ -2,6 +2,8 @@ package pt.amane.bds02.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -51,7 +53,7 @@ public class EventService {
 			copyEventDto(event, dto);
 			event = repository.save(event);
 			return new EventDTO(event);
-		} catch (EmptyResultDataAccessException e) {
+		} catch (EntityNotFoundException e) {
 			throw new ObjectNotFoundException("Id not found! Id: " + id);
 		}
 	}
